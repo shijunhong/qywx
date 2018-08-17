@@ -10,7 +10,10 @@ import {
 // 创建axios实例
 const service = axios.create({
   baseURL: `${host}/api`,
-  timeout: 60000 // 请求超时时间
+  timeout: 60000, // 请求超时时间
+  headers: {
+    'Authorization': sessionStorage.getItem('token') ? 'Bearer ' + sessionStorage.getItem('token') : ''
+  }
 })
 
 // request拦截器
