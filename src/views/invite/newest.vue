@@ -2,8 +2,8 @@
   <div>
       <p class="title">最新邀请客户</p>
       <ul class="list">
-        <li class="list-item" >
-          <p class="list-item-left" v-for="(item,index) in list">成都二月小森林有限公司</p>
+        <li class="list-item" v-for="(item,index) in list">
+          <p class="list-item-left">成都二月小森林有限公司</p>
           <p class="list-item-ritht">
             <span class="name">李田</span>
             <span class="date">2018/07/08</span>
