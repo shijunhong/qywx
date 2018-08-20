@@ -11,5 +11,23 @@ export default [
     name: '邀请客户表单',
     component: () =>
       import ('views/invite/form')
-  }
+  },
+  {
+    path: '/inviteok',
+    name: '客户资料提交成功',
+    component: () =>
+      import ('views/invite/ok')
+  },
+  {
+    path: '/customer',
+    name: '获客统计',
+    component: () =>
+      import ('views/invite/customer')
+  },
+  {
+    path: '/noauth',
+    name: '无权限页面',
+    component: () =>
+      import ('views/common/NoAuth')
+  },
 ]

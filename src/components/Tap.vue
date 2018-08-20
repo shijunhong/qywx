@@ -10,6 +10,7 @@
           <span class="line"  v-show="index === 2"></span>
       </div>
     </div>
+    <slot ></slot>
     <slot v-if="index === 1" name="tap1"></slot>
     <slot v-if="index === 2" name="tap2"></slot>
   </div>

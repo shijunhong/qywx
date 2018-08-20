@@ -15,7 +15,7 @@ export default {
         },
         {
           name: '获客统计',
-          url: '/statistics'
+          url: '/customer'
         }
       ]
     }
