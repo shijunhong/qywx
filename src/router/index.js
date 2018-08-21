@@ -28,6 +28,6 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  wxconfig()
+  wxconfig(['onMenuShareWechat'])
 })
 export default router
