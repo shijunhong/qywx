@@ -10,14 +10,12 @@ import {
 // 创建axios实例
 const service = axios.create({
   baseURL: `${host}/api`,
-  timeout: 60000, // 请求超时时间
-  headers: {
-    'Authorization': sessionStorage.getItem('login') ? 'Bearer ' + sessionStorage.getItem('login').token : ''
-  }
+  timeout: 60000 // 请求超时时间
 })
 
 // request拦截器
 service.interceptors.request.use((config) => {
+  config.headers['Authorization'] = sessionStorage.getItem('login') ? 'Bearer ' + sessionStorage.getItem('login').token : ''
   Indicator.open({
     text: '加载中...',
     spinnerType: 'fading-circle'
