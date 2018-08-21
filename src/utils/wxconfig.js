@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default (jsApiList = []) => (
   new Promise((resolve, reject) => {
     wx.config({
@@ -6,8 +7,8 @@ export default (jsApiList = []) => (
       appId: 'wwf8a477207b560622', // 必填，企业微信的corpID
       timestamp: new Date().getTime() / 1000, // 必填，生成签名的时间戳
       nonceStr: Math.random() + '', // 必填，生成签名的随机串
-      signature: 'dhb168', // 必填，签名，见附录1
-      jsApiList, // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+      signature: '0f978b1b7884092cfb825fed7ea18bc9b9fd3b27', // 必填，签名，见附录1
+      jsApiList // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     })
     wx.error(function (res) {
       reject(res)
