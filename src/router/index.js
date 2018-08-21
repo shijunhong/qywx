@@ -6,7 +6,7 @@ import wxconfig from 'utils/wxconfig'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes
 })
 
