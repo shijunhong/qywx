@@ -1,6 +1,12 @@
 /* eslint-disable */
 export default [
   {
+    path: '/login',
+    name: '登录页',
+    component: () =>
+      import ('views/common/login')
+  },
+  {
     path: '/invite',
     name: '邀请客户',
     component: () =>

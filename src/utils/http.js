@@ -12,7 +12,7 @@ const service = axios.create({
   baseURL: `${host}/api`,
   timeout: 60000, // 请求超时时间
   headers: {
-    'Authorization': sessionStorage.getItem('token') ? 'Bearer ' + sessionStorage.getItem('token') : ''
+    'Authorization': sessionStorage.getItem('login') ? 'Bearer ' + sessionStorage.getItem('login').token : ''
   }
 })
 

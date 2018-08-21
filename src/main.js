@@ -8,7 +8,6 @@ import 'assets/styles/reset.css'
 import 'assets/styles/reset_mintui.css'
 
 Vue.prototype.$wx = window.wx
-store.dispatch('login')
 Vue.config.productionTip = false
 Vue.use(MintUI)
 
