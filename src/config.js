@@ -1,5 +1,5 @@
 // 测试环境
-export const host = ''
+export const host = 'http://crmapif1.newdhb.com'
 
 // 预发环境
 // export const host = ''

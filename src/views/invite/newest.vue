@@ -2,7 +2,7 @@
   <div>
       <p class="title">最新邀请客户</p>
       <ul class="list">
-        <li class="list-item" v-for="(item,index) in list">
+        <li class="list-item" v-for="(item,index) in list" :key="index">
           <p class="list-item-left">成都二月小森林有限公司</p>
           <p class="list-item-ritht">
             <span class="name">李田</span>
