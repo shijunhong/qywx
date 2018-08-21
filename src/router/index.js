@@ -6,12 +6,12 @@ import wxconfig from 'utils/wxconfig'
 Vue.use(Router)
 
 const router = new Router({
-  // mode: 'history',
   routes
 })
 
 router.beforeEach((to, from, next) => {
-  if (!sessionStorage.getItem('login')) {
+  if (!sessionStorage.getItem('access_token')) {
+    debugger
     if (to.path == '/login') {
       next()
       return

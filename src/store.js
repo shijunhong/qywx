@@ -25,12 +25,10 @@ export default new Vuex.Store({
         spinnerType: 'fading-circle'
       })
       login(code).then((res) => {
-        sessionStorage.setItem('login', res)
+        sessionStorage.setItem('access_token', res.access_token)
         // 登录成功跳转
-        setTimeout(() => {
-          Indicator.close()
-          router.push('/invite')
-        }, 0)
+        Indicator.close()
+        router.push('/invite')
       })
     }
   }

@@ -15,8 +15,8 @@ const service = axios.create({
 
 // request拦截器
 service.interceptors.request.use((config) => {
-  if (sessionStorage.getItem('login')) {
-    config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('login').token
+  if (sessionStorage.getItem('access_token')) {
+    config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
   }
 
   Indicator.open({
