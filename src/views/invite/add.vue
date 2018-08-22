@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  props: ['info'],
   components: {}
 }
 </script>

@@ -11,7 +11,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: ['info']
+}
 </script>
 
 <style lang="scss" scoped>
@@ -51,7 +53,7 @@ export default {}
     margin-bottom: 0.4rem;
   }
 }
-.qr-tip{
+.qr-tip {
   font-size: 0.28rem;
   color: #999;
   text-align: center;

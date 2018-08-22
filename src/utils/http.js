@@ -17,6 +17,7 @@ const service = axios.create({
 service.interceptors.request.use((config) => {
   if (sessionStorage.getItem('access_token')) {
     config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
+    // config.headers['Authorization'] = 'Bearer ' + 'L2HWYN5bheGxeh7NtK3SS0WTd9Kpyc45sirpXvkD'
   }
 
   Indicator.open({

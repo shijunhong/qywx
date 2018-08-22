@@ -13,8 +13,14 @@ import Tap from 'components/Tap'
 import add from './add'
 import attention from './attention'
 import Bottom from 'components/Bottom'
+// import { getQr } from 'api/invite'
 
 export default {
+  mounted() {
+    // getQr().then(res => {
+    //   console.log(res)
+    // })
+  },
   components: {
     Tap,
     add,
