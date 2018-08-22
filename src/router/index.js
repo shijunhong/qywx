@@ -11,7 +11,6 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (!sessionStorage.getItem('access_token')) {
-    debugger
     if (to.path == '/login') {
       next()
       return
