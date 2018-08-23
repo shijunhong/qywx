@@ -30,10 +30,9 @@ export default new Vuex.Store({
         spinnerType: 'fading-circle'
       })
       login(code).then((res) => {
-        console.log(res)
-        refreshExpires(res.expires_in)
-        sessionStorage.setItem('access_token', res.access_token)
-        sessionStorage.setItem('refresh_token', res.refresh_token)
+        refreshExpires(res.data.expires_in)
+        sessionStorage.setItem('access_token', res.data.access_token)
+        sessionStorage.setItem('refresh_token', res.data.refresh_token)
         // 登录成功跳转
         Indicator.close()
         router.push('/invite')
