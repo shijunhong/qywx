@@ -24,8 +24,8 @@ export function refreshToken(config) {
           Promise.resolve()
         }
       } else {
-        sessionStorage.clear()
-        router.push('/login')
+        // sessionStorage.clear()
+        // router.push('/login')
       }
       // })
       // eslint-disable-next-line
@@ -33,12 +33,12 @@ export function refreshToken(config) {
       // Toast('系统超时,请重新登录')
       sessionStorage.clear()
       setTimeout(() => {
-        router.push('/login')
+        // router.push('/login')
       }, 1000)
     })
     // eslint-disable-next-line
   } else {
-    router.push('/login')
+    // router.push('/login')
   }
 }
 
