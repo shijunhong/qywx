@@ -9,7 +9,7 @@ import {
 export function refreshToken(config) {
   const refresh_token = sessionStorage.getItem('refresh_token')
   // eslint-disable-next-line
-  if (refresh_token) {
+  if (refresh_token && refresh_token !="undefined") {
     return refreshTokenApi(refresh_token).then(res => {
       // return new Promise((resolve) => {
       if (res.status === 'T') {
