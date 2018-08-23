@@ -1,28 +1,59 @@
 <template>
-  <div>
+  <div
+       v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="loading"
+      infinite-scroll-distance="0"
+  >
       <p class="title">最新邀请客户</p>
       <ul class="list">
         <li class="list-item" v-for="(item,index) in list" :key="index">
-          <p class="list-item-left">成都二月小森林有限公司</p>
+          <p class="list-item-left">{{item.company_name}}</p>
           <p class="list-item-ritht">
-            <span class="name">李田</span>
-            <span class="date">2018/07/08</span>
+            <span class="name">{{item.client_name}}</span>
+            <span class="date">{{item.register_date}}</span>
           </p>
         </li>
       </ul>
+      <load-bottom v-if="showLoadBottm"/>
   </div>
 </template>
 
 <script>
+import { newestList } from 'api/customer'
+import LoadBottom from 'components/LoadBottom'
+
 export default {
-  props: {
-    list: {
-      type: Array,
-      default: () => []
+  components: {
+    LoadBottom
+  },
+  methods: {
+    getData() {
+      if (this.page >= this.last_page) return
+      newestList(this.page, this.pageSize).then((res) => {
+        if (res.status === 'T') {
+          this.list = [...this.list, ...res.data]
+          this.last_page = res.pagination.last_page
+          this.page++
+        }
+      })
+    },
+    loadMore() {
+      this.getData()
     }
   },
   data() {
-    return {}
+    return {
+      list: [],
+      page: 1,
+      pageSize: 8,
+      last_page: 100
+    }
+  },
+  computed: {
+    showLoadBottm() {
+      if (this.page >= this.last_page) return true
+      return false
+    }
   }
 }
 </script>

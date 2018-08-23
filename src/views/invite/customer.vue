@@ -1,25 +1,20 @@
 <template>
-  <div class="customer"
-      v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="0"
-  >
+  <div class="customer">
     <tap tap1="我的邀请" tap2="员工排行">
         <div class="statistics">
           <p class="title item-1 statistics-item">邀请客户数</p>
           <p class="item-2 statistics-item">
-            <span>本周：686876</span>
-            <span>当月：686876</span>
+            <span>本周：{{weekCount}}</span>
+            <span>当月：{{monthCount}}</span>
           </p>
           <div class="item-3 statistics-item">
             <p class="sub-title">今日邀请</p>
-            <p class="num">129</p>
+            <p class="num">{{todayCount}}</p>
           </div>
         </div>
         <newest slot="tap1"/>
         <range slot="tap2"/>
     </tap>
-    <load-bottom />
     <bottom />
   </div>
 </template>
@@ -29,18 +24,30 @@ import Tap from 'components/Tap'
 import newest from './newest'
 import range from './range'
 import Bottom from 'components/Bottom'
-import LoadBottom from 'components/LoadBottom'
+import { statistics } from 'api/customer'
 
 export default {
   components: {
     Tap,
     newest,
     range,
-    Bottom,
-    LoadBottom
+    Bottom
   },
-  methods: {
-    loadMore() {}
+  data() {
+    return {
+      todayCount: 0,
+      weekCount: 0,
+      monthCount: 0
+    }
+  },
+  mounted() {
+    statistics().then((res) => {
+      if (res.status === 'T') {
+        this.todayCount = res.data.todayCount
+        this.weekCount = res.data.weekCount
+        this.monthCount = res.data.monthCount
+      }
+    })
   }
 }
 </script>

@@ -36,4 +36,10 @@ export default [
     component: () =>
       import ('views/common/NoAuth')
   },
+  {
+    path: '/expire',
+    name: '应用过期',
+    component: () =>
+      import ('views/common/expire')
+  },
 ]

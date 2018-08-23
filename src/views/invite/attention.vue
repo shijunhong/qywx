@@ -5,7 +5,7 @@
         <span class="line"></span>
       </div>
       <p class="tip">邀请客户关注微工作台之后，客户可以在微工作台中接收各种通知消息以及进行互动</p>
-      <img src="" alt="图片加载失败" class="qr"/>
+      <img :src="info.corp_wxqrcode" alt="图片加载失败" class="qr"/>
       <p class="qr-tip">微工作台二维码</p>
     </div>
 </template>

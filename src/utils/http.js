@@ -1,12 +1,16 @@
+/* eslint-disable */
 import {
   host
 } from '../config'
 import axios from 'axios'
-
+import router from '../router'
 import {
   Indicator
 } from 'mint-ui'
-
+import store from '../store'
+import {
+  refreshToken
+} from 'api/base'
 // 创建axios实例
 const service = axios.create({
   baseURL: `${host}`,
@@ -15,17 +19,29 @@ const service = axios.create({
 
 // request拦截器
 service.interceptors.request.use((config) => {
-  if (sessionStorage.getItem('access_token')) {
-    config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
-    // config.headers['Authorization'] = 'Bearer ' + 'L2HWYN5bheGxeh7NtK3SS0WTd9Kpyc45sirpXvkD'
+  const expiresIn = sessionStorage.getItem('login') ? sessionStorage.getItem('login').expires_in : null
+  if (expiresIn && store.state.expiresData - (new Date().getTime() / 1000) < 300) {
+    return store.dispatch('refreshToken').then(()=>{
+      config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
+      Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      })
+      return config
+    })
+  } else {
+    if (sessionStorage.getItem('access_token')) {
+      config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
+      // config.headers['Authorization'] = 'Bearer ' + '9a6mN6qkIBcm90naxeEAFtnwcFq9Dp3UKXyObO1S'
+    }
+
+    Indicator.open({
+      text: '加载中...',
+      spinnerType: 'fading-circle'
+    })
+
+    return config
   }
-
-  Indicator.open({
-    text: '加载中...',
-    spinnerType: 'fading-circle'
-  })
-
-  return config
 }, error => {
   Indicator.close()
   Promise.reject(error)
@@ -35,19 +51,40 @@ service.interceptors.request.use((config) => {
 service.interceptors.response.use(
   response => {
     let data = response.data
-    // 请求失败
-    if (data.status !== 'T') {
-      //  如果失败的信息存在，跳出失败的信息
-    }
     Indicator.close()
     return data
   }, error => {
     if (error.response) {
+      if (error.response.status == 401) {
+        //  如果失败的信息存在，跳出失败的信息
+        const msg = error.response.data.error.message
+        // 应用过期
+        if (msg.startWith('qywx_application_expried')) {
+          // 跳转到应用过期页面
+          router.push('/noauth')
+          return
+        }
+
+        // code过期
+        if (msg.startWith('invalid_credentials')) {
+          sessionStorage.clear()
+          router.push('/login')
+          return
+        }
+
+        if(msg.startWith("access_denied")) {
+          store.dispatch('refreshToken')
+          return
+        }
+        // 跳转到无权限页面
+        router.push('/noauth')
+
+      }
       Indicator.close()
-      return Promise.reject(error.response) // eslint-disable-next-line
     } else {
       Indicator.close()
     }
+    return Promise.reject(error)
   })
 
 export default service

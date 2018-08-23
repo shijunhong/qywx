@@ -71,7 +71,7 @@ export default {
             let errorTip = this.valid === 'faild' ? this.errorTip : ''
             if (!this.v && this.isRequest) errorTip = '不能为空'
             // eslint-disable-next-line
-            this[key].call(this,errorTip)
+            this[key].call(this, errorTip)
           },
           false
         )
@@ -80,11 +80,15 @@ export default {
   methods: {
     validate() {
       // eslint-disable-next-line
-      let {result,tip = '错误'} = this.ruleFn.call(this, this.v)
-      this.valid = result
+      let { result, tip = '错误' } = this.ruleFn.call(this, this.v)
       let errorTip = result === 'faild' ? tip : ''
-      if (!this.v && this.isRequest) errorTip = '不能为空'
+      if (!this.v && this.isRequest) {
+        errorTip = '不能为空'
+        result = 'faild'
+      }
       this.errorTip = errorTip
+      this.valid = result
+
       return errorTip
     }
   },

@@ -6,7 +6,7 @@
             <span class="line"></span>
           </div>
           <p class="tip">客户使用手机微信扫描下面的二维码</p>
-          <img src="" alt="图片加载失败" class="qr"/>
+          <img :src="info.staff_invite_qrcode" alt="图片加载失败" class="qr"/>
       </div>
        <div class="block">
           <div class="title">
@@ -14,7 +14,7 @@
             <span class="line"></span>
           </div>
           <p class="tip">发送一下链接给想要邀请的客户</p>
-          <p class="url-box">https://blog.csdn.net/jession_lin/article/details/60581318</p>
+          <p class="url-box">{{info.staff_invite_url}}</p>
           <span class="url-share">复制并发送给客户</span>
       </div>
   </div>

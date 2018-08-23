@@ -3,21 +3,21 @@
     <div class="form">
         <div class="item">
           <span class="title">客户名称：</span>
-          <wx-input v-model="d" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="name_rule" ref="name" />
+          <wx-input v-model="client_name " width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="name_rule" ref="name" />
         </div>
         <div class="item">
           <span class="title">联系人：</span>
-          <wx-input v-model="d" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="name_rule" ref="linkman" />
+          <wx-input v-model="contact_name" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="contact_rule" ref="linkman" />
         </div>
         <div class="item">
           <span class="title">手机号：</span>
-          <wx-input v-model="d" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="name_rule" ref="tel" />
+          <wx-input v-model="mobile" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="mobile_rule" ref="tel" />
         </div>
         <div class="item">
           <span class="title">验证码：</span>
-          <wx-input v-model="d" width="50%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="name_rule" ref="yzm" />
-          <span class="yzm">获取验证码</span>
-          <!-- <span class="yzm date">剩余 20 秒</span> -->
+          <wx-input v-model="verify_code" width="50%" :isRequest="true" :onblur="blur" :rule="['blur']"  ref="yzm" />
+          <span v-if="!count" class="yzm" @click="sendYzm">获取验证码</span>
+          <span v-if="count" class="yzm date">剩余 {{num}} 秒</span>
         </div>
     </div>
     <div class="btn-box">
@@ -29,18 +29,35 @@
 
 <script>
 import WxInput from 'components/WxInput'
-import { Button } from 'mint-ui'
+import { Button, Toast } from 'mint-ui'
+import { getVerifyCode, invite } from 'api/invite'
+import { getUserInfo } from 'api/base'
 
 export default {
   components: {
     WxInput,
     'mt-button': Button
   },
+  mounted() {
+    getUserInfo().then((res) => {
+      if (res.status === 'T') {
+        this.staff_id = res.data.staff.staff_id
+      }
+    })
+  },
   data() {
     return {
-      d: '1',
+      client_name: '',
+      contact_name: '',
+      mobile: '',
+      verify_code: '',
+      staff_id: '',
       errorShow: false,
-      errorTip: ''
+      errorTip: '',
+      timeID: null,
+      num: 60,
+      countTime: null,
+      count: false // 验证码开始计数
     }
   },
   methods: {
@@ -48,12 +65,80 @@ export default {
       if (errorTip) {
         this.errorShow = true
         this.errorTip = errorTip
+      }else{
+        this.errorShow = false
+        this.errorTip = ''
       }
     },
-    name_rule() {
-      return {
-        result: 'faild',
-        tip: '客户名称不超过50个字'
+    sendYzm() {
+      if (this.mobile.length !== 11) return
+      getVerifyCode(this.mobile, this.staff_id, 0).then((res) => {
+        if (res.status === 'T') {
+          this.timeID = setInterval(() => {
+            clearInterval(this.countTime)
+            this.checkYzmStatus()
+          }, 1000)
+        }
+      })
+    },
+    checkYzmStatus() {
+      getVerifyCode(this.mobile, this.staff_id, 1).then((res) => {
+        if (res.status === 'T') {
+          Toast('验证码发送成功')
+          clearInterval(this.timeID)
+          this.timeID = null
+          this.count = true
+          this.countTime = setInterval(() => {
+            if (this.num === 0) {
+              clearInterval(this.countTime)
+              this.countTime = null
+              this.num = 60
+              this.count = false
+              return
+            }
+            this.num--
+          }, 1000)
+        }
+      })
+    },
+    name_rule(res) {
+      if (res.length > 50) {
+        return {
+          result: 'faild',
+          tip: '客户名称超限：客户名称最多填写50个字哦'
+        }
+        // eslint-disable-next-line
+      } else {
+        return {
+          result: 'success'
+        }
+      }
+    },
+    contact_rule(res) {
+      if (res.length > 50) {
+        return {
+          result: 'faild',
+          tip: '联系人超限：联系人最多填写50个字哦'
+        }
+        // eslint-disable-next-line
+      } else {
+        return {
+          result: 'success'
+        }
+      }
+    },
+    mobile_rule(res) {
+      if (res.length !== 11) {
+        return {
+          result: 'faild',
+          tip: '手机号码没有通过验证：请输入正确的手机号码'
+        }
+        // eslint-disable-next-line
+      } else {
+        // eslint-disable-next-line
+        return {
+          result: 'success'
+        }
       }
     },
     // 提交
