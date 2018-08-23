@@ -31,7 +31,6 @@
 import WxInput from 'components/WxInput'
 import { Button, Toast } from 'mint-ui'
 import { getVerifyCode, invite } from 'api/invite'
-import { getUserInfo } from 'api/base'
 
 export default {
   components: {
@@ -39,11 +38,7 @@ export default {
     'mt-button': Button
   },
   mounted() {
-    getUserInfo().then((res) => {
-      if (res.status === 'T') {
-        this.staff_id = res.data.staff.staff_id
-      }
-    })
+    this.staff_id = this.$route.query.staff_id
   },
   data() {
     return {
@@ -65,7 +60,7 @@ export default {
       if (errorTip) {
         this.errorShow = true
         this.errorTip = errorTip
-      }else{
+      } else {
         this.errorShow = false
         this.errorTip = ''
       }
@@ -73,11 +68,9 @@ export default {
     sendYzm() {
       if (this.mobile.length !== 11) return
       getVerifyCode(this.mobile, this.staff_id, 0).then((res) => {
+        clearInterval(this.countTime)
         if (res.status === 'T') {
-          this.timeID = setInterval(() => {
-            clearInterval(this.countTime)
-            this.checkYzmStatus()
-          }, 1000)
+          this.checkYzmStatus()
         }
       })
     },
@@ -98,6 +91,8 @@ export default {
             }
             this.num--
           }, 1000)
+        } else {
+          this.checkYzmStatus()
         }
       })
     },
@@ -144,7 +139,28 @@ export default {
     // 提交
     submit() {
       this.validate().then((valid) => {
-        // if (!valid) return
+        if (!valid) return
+        invite({
+          commonStaffId: this.staff_id,
+          client_name: this.client_name,
+          contact_name: this.contact_name,
+          mobile: this.mobile,
+          verify_code: this.verify_code
+        }).then((res) => {
+          if (res.status === 'T') {
+            this.$router.push(
+              `/inviteok?client_name=${this.client_name}&contact_name=${this.contact_name}&mobile=${this.mobile}`
+            )
+          } else {
+            if (res.error) {
+              const msg = res.error[0] || res.error.code || res.error.mobile[0] || '提交错误'
+              Toast({
+                message: msg,
+                duration: 2000
+              })
+            }
+          }
+        })
       })
     },
     // 所有表单的验证

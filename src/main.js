@@ -7,19 +7,23 @@ import MintUI from 'mint-ui'
 import 'assets/styles/reset.css'
 import 'assets/styles/reset_mintui.css'
 import './utils/extend'
+// import {
+//   refreshExpires
+// } from 'utils/refreshToken'
+import VueClipboard from 'vue-clipboard2'
 
-// sessionStorage.setItem('login', {
-//   expires_in: '86400',
-//   refresh_token: 'vvvJYnHP2lGZSIM4WDWxzWxFgZoqIovuahkoWdvt',
-//   access_token: 'LFdd2T6eTVsWfLMcYP65ld3An4ldZCPJWpvjNRQ2'
-// })
-// sessionStorage.setItem('access_token', 'LFdd2T6eTVsWfLMcYP65ld3An4ldZCPJWpvjNRQ2')
+VueClipboard.config.autoSetContainer = true // add this line
+Vue.use(VueClipboard)
+
+// sessionStorage.setItem('refresh_token', '4s7d4lZc3SitmlFtpVOFi35UaNcm3cdNLS7kq2WJ')
+// sessionStorage.setItem('access_token', '3JGohwdk9Nlm5A1YSNarRwsIfTuGuis3Pj4WRK3k')
+// refreshExpires('86400')
 
 Vue.prototype.$wx = window.wx
 Vue.config.productionTip = false
 Vue.use(MintUI)
 
-new Vue({
+export default new Vue({
   router,
   store,
   render: (h) => h(App)

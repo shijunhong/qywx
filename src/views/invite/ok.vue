@@ -5,20 +5,20 @@
     <div class="form">
         <div class="item">
           <span class="title">客户名称：</span>
-          <span class="info">阿商科技</span>
+          <span class="info">{{client_name}}</span>
         </div>
         <div class="item">
           <span class="title">联系人：</span>
-          <span class="info">leo</span>
+          <span class="info">{{contact_name}}</span>
         </div>
         <div class="item">
           <span class="title">手机号：</span>
-          <span class="info">13980983472</span>
+          <span class="info">{{mobile}}</span>
         </div>
     </div>
-    <div class="btn-box">
+    <!-- <div class="btn-box">
        <mt-button  class="submit" type="primary" @click="ok" >完成</mt-button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -30,7 +30,17 @@ export default {
     'mt-button': Button
   },
   data() {
-    return {}
+    return {
+      client_name: '',
+      contact_name: '',
+      mobile: ''
+    }
+  },
+  mounted() {
+    const query = this.$route.query
+    this.client_name = query.client_name
+    this.contact_name = query.contact_name
+    this.mobile = query.mobile
   },
   methods: {
     // 完成

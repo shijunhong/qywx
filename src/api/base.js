@@ -20,7 +20,7 @@ export function login(code) {
 
 // 登陆
 // eslint-disable-next-line
-export function refreshToken(refresh_token) {
+export function refreshTokenApi(refresh_token) {
   return axios({
     baseURL: `${host}`,
     timeout: 60000, // 请求超时时间
@@ -35,13 +35,5 @@ export function refreshToken(refresh_token) {
       refresh_token
     },
     method: 'post'
-  })
-}
-
-// 获取用户信息
-export function getUserInfo() {
-  return http({
-    url: '/api/v1/users/info',
-    method: 'get'
   })
 }

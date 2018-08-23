@@ -7,28 +7,28 @@ import router from '../router'
 import {
   Indicator
 } from 'mint-ui'
-import store from '../store'
+import v from '../main'
 import {
   refreshToken
-} from 'api/base'
+} from 'utils/refreshToken'
 // 创建axios实例
 const service = axios.create({
   baseURL: `${host}`,
   timeout: 60000 // 请求超时时间
 })
 
+
 // request拦截器
-service.interceptors.request.use((config) => {
-  const expiresIn = sessionStorage.getItem('login') ? sessionStorage.getItem('login').expires_in : null
-  if (expiresIn && store.state.expiresData - (new Date().getTime() / 1000) < 300) {
-    return store.dispatch('refreshToken').then(()=>{
-      config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
+service.interceptors.request.use(async (config) => {
+  if (sessionStorage.getItem('expires') && (sessionStorage.getItem('expires') - (new Date().getTime() / 1000) < 300)) {
+      config =  await refreshToken(config)
+      console.log(config)
       Indicator.open({
         text: '加载中...',
         spinnerType: 'fading-circle'
       })
       return config
-    })
+   
   } else {
     if (sessionStorage.getItem('access_token')) {
       config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
@@ -56,6 +56,7 @@ service.interceptors.response.use(
   }, error => {
     if (error.response) {
       if (error.response.status == 401) {
+        Indicator.close()
         //  如果失败的信息存在，跳出失败的信息
         const msg = error.response.data.error.message
         // 应用过期
@@ -72,8 +73,8 @@ service.interceptors.response.use(
           return
         }
 
-        if(msg.startWith("access_denied")) {
-          store.dispatch('refreshToken')
+        if (msg.startWith("access_denied")) {
+          refreshToken()
           return
         }
         // 跳转到无权限页面
@@ -84,7 +85,7 @@ service.interceptors.response.use(
     } else {
       Indicator.close()
     }
-    return Promise.reject(error)
+    return Promise.resolve(error.response.data)
   })
 
 export default service

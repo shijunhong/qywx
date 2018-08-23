@@ -15,15 +15,35 @@
           </div>
           <p class="tip">发送一下链接给想要邀请的客户</p>
           <p class="url-box">{{info.staff_invite_url}}</p>
-          <span class="url-share">复制并发送给客户</span>
+          <span class="url-share" @click="copy">复制并发送给客户</span>
       </div>
   </div>
 </template>
 
 <script>
+import { Toast } from 'mint-ui'
+
 export default {
   props: ['info'],
-  components: {}
+  components: {},
+  methods: {
+    copy() {
+      this.$copyText(this.info.staff_invite_url).then(
+        () => {
+          Toast({
+            message: '已复制到剪切板',
+            duration: 2000
+          })
+        },
+        () => {
+          Toast({
+            message: '复制失败',
+            duration: 2000
+          })
+        }
+      )
+    }
+  }
 }
 </script>
 
