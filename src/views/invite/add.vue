@@ -8,7 +8,7 @@
           <p class="tip">客户使用手机微信扫描下面的二维码</p>
           <img :src="info.staff_invite_qrcode" alt="图片加载失败" class="qr"/>
       </div>
-       <div class="block">
+      <div class="block">
           <div class="title">
             方式二
             <span class="line"></span>
@@ -104,5 +104,6 @@ export default {
   margin: 0 auto;
   display: block;
   font-size: 0.28rem;
+  margin-bottom: 0.5rem;
 }
 </style>

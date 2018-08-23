@@ -69,7 +69,7 @@ service.interceptors.response.use(
         // code过期
         if (msg.startWith('invalid_credentials')) {
           sessionStorage.clear()
-          // router.push('/login')
+          router.push('/login')
           return
         }
 

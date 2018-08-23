@@ -14,9 +14,9 @@ export function refreshToken(config) {
       // return new Promise((resolve) => {
       if (res.status === 'T') {
         // 更新过期时间，以及登录状态
-        refreshExpires(res.expires_in)
-        sessionStorage.setItem('access_token', res.access_token)
-        sessionStorage.setItem('refresh_token', res.refresh_token)
+        refreshExpires(res.data.expires_in)
+        sessionStorage.setItem('access_token', res.data.access_token)
+        sessionStorage.setItem('refresh_token', res.data.refresh_token)
         if (config) {
           config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
           Promise.resolve(config)
@@ -24,8 +24,8 @@ export function refreshToken(config) {
           Promise.resolve()
         }
       } else {
-        // sessionStorage.clear()
-        // router.push('/login')
+        sessionStorage.clear()
+        router.push('/nofound')
       }
       // })
       // eslint-disable-next-line
@@ -33,12 +33,13 @@ export function refreshToken(config) {
       // Toast('系统超时,请重新登录')
       sessionStorage.clear()
       setTimeout(() => {
-        // router.push('/login')
+        router.push('/nofound')
       }, 1000)
     })
     // eslint-disable-next-line
   } else {
-    // router.push('/login')
+    sessionStorage.clear()
+    router.push('/nofound')
   }
 }
 

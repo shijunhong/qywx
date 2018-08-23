@@ -42,4 +42,10 @@ export default [
     component: () =>
       import ('views/common/expire')
   },
+  {
+    path: '/nofound',
+    name: '页面404',
+    component: () =>
+      import ('views/common/NoFound')
+  },
 ]

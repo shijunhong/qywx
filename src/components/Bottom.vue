@@ -35,7 +35,7 @@ $h: 1.08rem;
   height: $h;
   background: #fff;
   color: #222;
-  font-size: 30rpx;
+  font-size: 0.3rem;
   border-top: 0.01rem solid #dedede;
   position: fixed;
   bottom: 0;
