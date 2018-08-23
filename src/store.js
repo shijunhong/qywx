@@ -30,6 +30,7 @@ export default new Vuex.Store({
         spinnerType: 'fading-circle'
       })
       login(code).then((res) => {
+        alert(res)
         refreshExpires(res.expires_in)
         sessionStorage.setItem('access_token', res.access_token)
         sessionStorage.setItem('refresh_token', res.refresh_token)
