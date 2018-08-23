@@ -30,7 +30,7 @@ export function refreshToken(config) {
       // })
       // eslint-disable-next-line
     }, err => {
-      Toast('系统超时,请重新登录')
+      // Toast('系统超时,请重新登录')
       sessionStorage.clear()
       setTimeout(() => {
         router.push('/login')

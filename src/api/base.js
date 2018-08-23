@@ -5,7 +5,9 @@ import {
 } from '@/config.js'
 // 登陆
 export function login(code) {
-  return http({
+  return axios({
+    baseURL: `${host}`,
+    timeout: 60000,
     url: '/oauth/token',
     data: {
       grant_type: 'qy_weixin_suite',
