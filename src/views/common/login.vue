@@ -10,7 +10,7 @@ export default {
     if (!this.$route.query.code) {
       const url = encodeURI(`${redirectHost}/login`)
       const href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wwf8a477207b560622&redirect_uri=${url}&response_type=code&scope=SCOPE&agentid=AGENTID&state=STATE#wechat_redirect`
-      // window.location.href = href
+      window.location.href = href
       return
     }
     // 有code后登录
