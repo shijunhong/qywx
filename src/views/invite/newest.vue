@@ -83,6 +83,9 @@ export default {
 
 <style lang="scss" scoped>
 @import 'assets/styles/list.scss';
+.list-item-left{
+  font-size: 0.3rem;
+}
 .container{
   padding-bottom:1rem;
 }

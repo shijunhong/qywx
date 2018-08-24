@@ -62,7 +62,13 @@ service.interceptors.response.use(
         // 应用过期
         if (msg.startWith('qywx_application_expried')) {
           // 跳转到应用过期页面
-          router.push('/noauth')
+          router.push('/expire')
+          return
+        }
+        
+        if (msg.startWith('qywx_application_not_enable')) {
+          // 跳转到应用过期页面
+          router.push('/expire')
           return
         }
 
