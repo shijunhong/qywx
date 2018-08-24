@@ -3,19 +3,19 @@
     <div class="form">
         <div class="item">
           <span class="title">客户名称：</span>
-          <wx-input v-model="client_name " width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="name_rule" ref="name" />
+          <wx-input emptyTip="请输入客户名称" v-model="client_name " width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="name_rule" ref="name" />
         </div>
         <div class="item">
           <span class="title">联系人：</span>
-          <wx-input v-model="contact_name" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="contact_rule" ref="linkman" />
+          <wx-input emptyTip="请输入联系人" v-model="contact_name" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="contact_rule" ref="linkman" />
         </div>
         <div class="item">
           <span class="title">手机号：</span>
-          <wx-input v-model="mobile" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="mobile_rule" ref="tel" />
+          <wx-input emptyTip="请输入手机号" v-model="mobile" width="77%" :isRequest="true" :onblur="blur" :rule="['blur']" :ruleFn="mobile_rule" ref="tel" />
         </div>
         <div class="item">
           <span class="title">验证码：</span>
-          <wx-input v-model="verify_code" width="50%" :isRequest="true" :onblur="blur" :rule="['blur']"  ref="yzm" />
+          <wx-input emptyTip="请输入验证码" v-model="verify_code" width="50%" :isRequest="true" :onblur="blur" :rule="['blur']"  ref="yzm" />
           <span v-if="!count" class="yzm" @click="sendYzm">获取验证码</span>
           <span v-if="count" class="yzm date">剩余 {{num}} 秒</span>
         </div>
@@ -66,7 +66,13 @@ export default {
       }
     },
     sendYzm() {
-      if (this.mobile.length !== 11) return
+      if (this.mobile.length === 0) {
+        Toast('请输入手机号')
+        return
+      }
+      if (this.mobile.length !== 11) {
+        return
+      }
       getVerifyCode(this.mobile, this.staff_id, 0).then((res) => {
         clearInterval(this.countTime)
         if (res.status === 'T') {

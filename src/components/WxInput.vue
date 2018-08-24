@@ -50,6 +50,10 @@ export default {
     onkeyup: {
       type: Function,
       default: () => {}
+    },
+    emptyTip: {
+      type: String,
+      default: () => '不能为空'
     }
   },
   data() {
@@ -69,7 +73,7 @@ export default {
           () => {
             if (this.rule.includes(key.slice(2))) this.validate()
             let errorTip = this.valid === 'faild' ? this.errorTip : ''
-            if (!this.v && this.isRequest) errorTip = '不能为空'
+            if (!this.v && this.isRequest) errorTip = this.emptyTip
             // eslint-disable-next-line
             this[key].call(this, errorTip)
           },
@@ -83,7 +87,7 @@ export default {
       let { result, tip = '错误' } = this.ruleFn.call(this, this.v)
       let errorTip = result === 'faild' ? tip : ''
       if (!this.v && this.isRequest) {
-        errorTip = '不能为空'
+        errorTip = this.emptyTip
         result = 'faild'
       }
       this.errorTip = errorTip

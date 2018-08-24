@@ -1,11 +1,12 @@
 import http from 'utils/http'
 
 // 二维码以及地址
-export function getQr(code) {
+export function getQr(url) {
   return http({
     url: '/api/zntk/v1/staff/qrcode',
     params: {
-      size: '150'
+      size: '150',
+      url
     },
     method: 'get'
   })

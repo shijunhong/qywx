@@ -22,5 +22,7 @@ export default {
   height: 1rem;
   line-height: 1rem;
   text-align: center;
+  font-size: 0.3rem;
+  color: #ccc;
 }
 </style>

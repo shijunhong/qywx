@@ -7,6 +7,13 @@ export function statistics() {
     method: 'get'
   })
 }
+// 所有员工的获客统计
+export function allStatistics() {
+  return http({
+    url: '/api/zntk/v1/staff/invite-rank-statistics',
+    method: 'get'
+  })
+}
 
 // 最新的邀请客户
 export function newestList(page = 1, pageSize = 5) {

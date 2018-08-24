@@ -2,9 +2,6 @@ import {
   refreshTokenApi
 } from 'api/base'
 import router from '../router'
-import {
-  Toast
-} from 'mint-ui'
 
 export function refreshToken(config) {
   const refresh_token = sessionStorage.getItem('refresh_token')
