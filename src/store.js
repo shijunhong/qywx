@@ -33,7 +33,7 @@ export default new Vuex.Store({
         console.log(res)
         if (res.data.status === 'F') {
           Indicator.close()
-          const msg = res.error.message
+          const msg = res.data.error.message
           if (msg.startWith('qywx_application_expried')) {
             // 跳转到应用过期页面
             router.push('/expire')
