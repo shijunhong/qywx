@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {
-  Indicator
-} from 'mint-ui'
 import router from './router'
 import {
   login
@@ -25,13 +22,8 @@ export default new Vuex.Store({
     login({
       commit
     }, code) {
-      Indicator.open({
-        text: '加载中...',
-        spinnerType: 'fading-circle'
-      })
       login(code).then((res) => {
         if (res.status === 'F') {
-          Indicator.close()
           const msg = res.error.message
           if (msg.startWith('qywx_application_expried')) {
             // 跳转到应用过期页面
@@ -52,7 +44,6 @@ export default new Vuex.Store({
         sessionStorage.setItem('access_token', res.access_token)
         sessionStorage.setItem('refresh_token', res.refresh_token)
         // 登录成功跳转
-        Indicator.close()
         router.push('/invite')
       })
     }

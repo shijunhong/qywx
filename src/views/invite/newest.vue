@@ -100,7 +100,7 @@ export default {
   color: #222;
 }
 .date {
-  font-size: 26rpx;
+  font-size: 0.26rem;
   color: #999;
   margin-left: 0.6rem;
 }
