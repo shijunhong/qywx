@@ -106,7 +106,7 @@ export default {
       if (res.length > 50) {
         return {
           result: 'faild',
-          tip: '客户名称超限：客户名称最多填写50个字哦'
+          tip: '客户名称最多填写50个字哦'
         }
         // eslint-disable-next-line
       } else {
@@ -119,7 +119,7 @@ export default {
       if (res.length > 50) {
         return {
           result: 'faild',
-          tip: '联系人超限：联系人最多填写50个字哦'
+          tip: '联系人最多填写50个字哦'
         }
         // eslint-disable-next-line
       } else {
@@ -132,7 +132,7 @@ export default {
       if (res.length !== 11) {
         return {
           result: 'faild',
-          tip: '手机号码没有通过验证：请输入正确的手机号码'
+          tip: '请输入正确的手机号码'
         }
         // eslint-disable-next-line
       } else {
