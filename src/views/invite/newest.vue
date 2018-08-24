@@ -18,9 +18,9 @@
       <p class="title">最新邀请客户</p>
       <ul class="list">
         <li class="list-item" v-for="(item,index) in list" :key="index">
-          <p class="list-item-left">{{item.company_name}}</p>
+          <p class="list-item-left">{{item.client_name}}</p>
           <p class="list-item-ritht">
-            <span class="name">{{item.client_name}}</span>
+            <span class="name">{{item.contact_name}}</span>
             <span class="date">{{item.register_date}}</span>
           </p>
         </li>
