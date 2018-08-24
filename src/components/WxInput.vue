@@ -115,6 +115,7 @@ export default {
   box-sizing: border-box;
   padding: 0.15rem 0.1rem;
   border-radius: 0.07rem;
+  font-size: 0.28rem;
 }
 .faild {
   border: 0.01rem solid $base_error;
