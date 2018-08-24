@@ -9,11 +9,11 @@ export function refreshToken(config) {
   if (refresh_token && refresh_token !="undefined") {
     return refreshTokenApi(refresh_token).then(res => {
       // return new Promise((resolve) => {
-      if (res.data.status !== 'F') {
+      if (res.status !== 'F') {
         // 更新过期时间，以及登录状态
-        refreshExpires(res.data.expires_in)
-        sessionStorage.setItem('access_token', res.data.access_token)
-        sessionStorage.setItem('refresh_token', res.data.refresh_token)
+        refreshExpires(res.expires_in)
+        sessionStorage.setItem('access_token', res.access_token)
+        sessionStorage.setItem('refresh_token', res.refresh_token)
         if (config) {
           config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('access_token')
           Promise.resolve(config)

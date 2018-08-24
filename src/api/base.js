@@ -1,12 +1,8 @@
-import axios from 'axios'
-import {
-  host
-} from '@/config.js'
+import http2 from 'utils/http2'
+
 // 登陆
 export function login(code) {
-  return axios({
-    baseURL: `${host}`,
-    timeout: 60000,
+  return http2({
     url: '/oauth/token',
     data: {
       grant_type: 'qy_weixin_suite',
@@ -22,13 +18,8 @@ export function login(code) {
 // 登陆
 // eslint-disable-next-line
 export function refreshTokenApi(refresh_token) {
-  return axios({
-    baseURL: `${host}`,
-    timeout: 60000, // 请求超时时间
+  return http2({
     url: '/oauth/token',
-    headers: {
-      Authorization: 'Bearer ' + sessionStorage.getItem('access_token')
-    },
     data: {
       grant_type: 'refresh_token',
       client_id: 1,

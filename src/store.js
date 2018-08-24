@@ -30,10 +30,9 @@ export default new Vuex.Store({
         spinnerType: 'fading-circle'
       })
       login(code).then((res) => {
-        console.log(res)
-        if (res.data.status === 'F') {
+        if (res.status === 'F') {
           Indicator.close()
-          const msg = res.data.error.message
+          const msg = res.error.message
           if (msg.startWith('qywx_application_expried')) {
             // 跳转到应用过期页面
             router.push('/expire')
@@ -49,9 +48,9 @@ export default new Vuex.Store({
           router.push('/noauth')
           return
         }
-        refreshExpires(res.data.expires_in)
-        sessionStorage.setItem('access_token', res.data.access_token)
-        sessionStorage.setItem('refresh_token', res.data.refresh_token)
+        refreshExpires(res.expires_in)
+        sessionStorage.setItem('access_token', res.access_token)
+        sessionStorage.setItem('refresh_token', res.refresh_token)
         // 登录成功跳转
         Indicator.close()
         router.push('/invite')

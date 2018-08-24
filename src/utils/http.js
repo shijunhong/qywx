@@ -22,7 +22,6 @@ const service = axios.create({
 service.interceptors.request.use(async (config) => {
   if (sessionStorage.getItem('expires') && (sessionStorage.getItem('expires') - (new Date().getTime() / 1000) < 300)) {
       config =  await refreshToken(config)
-      console.log(config)
       Indicator.open({
         text: '加载中...',
         spinnerType: 'fading-circle'
