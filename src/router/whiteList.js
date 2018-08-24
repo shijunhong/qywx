@@ -1,5 +1,6 @@
 export default [
   '/noauth',
   '/expire',
-  '/addclient'
+  '/addclient',
+  '/inviteok'
 ]
