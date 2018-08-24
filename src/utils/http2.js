@@ -3,10 +3,6 @@ import {
   host
 } from '../config'
 import axios from 'axios'
-import {
-  Indicator
-} from 'mint-ui'
-
 
 // 创建axios实例
 const service = axios.create({
@@ -19,7 +15,6 @@ const service = axios.create({
 service.interceptors.request.use(async (config) => {
   return config
 }, error => {
-  Indicator.close()
   Promise.resolve(error)
 })
 
