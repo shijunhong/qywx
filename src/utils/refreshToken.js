@@ -9,7 +9,7 @@ export function refreshToken(config) {
   if (refresh_token && refresh_token !="undefined") {
     return refreshTokenApi(refresh_token).then(res => {
       // return new Promise((resolve) => {
-      if (res.status === 'T') {
+      if (res.data.status !== 'F') {
         // 更新过期时间，以及登录状态
         refreshExpires(res.data.expires_in)
         sessionStorage.setItem('access_token', res.data.access_token)

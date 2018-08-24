@@ -30,7 +30,9 @@ export default new Vuex.Store({
         spinnerType: 'fading-circle'
       })
       login(code).then((res) => {
-        if (res.status === 'F') {
+        console.log(res)
+        if (res.data.status === 'F') {
+          Indicator.close()
           const msg = res.error.message
           if (msg.startWith('qywx_application_expried')) {
             // 跳转到应用过期页面
