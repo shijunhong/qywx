@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div class="container"
        v-infinite-scroll="loadMore"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="0"
@@ -65,7 +65,7 @@ export default {
     return {
       list: [],
       page: 1,
-      pageSize: 8,
+      pageSize: 12,
       last_page: 100,
       todayCount: 0,
       weekCount: 0,
@@ -83,7 +83,9 @@ export default {
 
 <style lang="scss" scoped>
 @import 'assets/styles/list.scss';
-
+.container{
+  padding-bottom:1rem;
+}
 .title {
   font-size: 0.38rem;
   color: #222;

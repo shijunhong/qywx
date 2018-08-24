@@ -18,7 +18,7 @@ import { redirectHost } from '@/config'
 
 export default {
   mounted() {
-    getQr(redirectHost).then((res) => {
+    getQr(`${redirectHost}/addclient`).then((res) => {
       if (res.status === 'T') {
         this.info = res.data
       }

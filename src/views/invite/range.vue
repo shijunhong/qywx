@@ -1,5 +1,6 @@
 <template>
   <div
+      class="container"
       v-infinite-scroll="loadMore"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="0"
@@ -20,7 +21,7 @@
         <li class="list-item" v-for="(item,index) in list" :key="index">
           <p class="list-item-left">
             <img v-if="index == 0" class="icon" :src="require('images/No1.png')" alt="" />
-            <span v-if="index != 0" :class="{'num1':index == 1 ||index == 2,'num2':index > 2}">{{index}}</span>
+            <span v-if="index != 0" :class="{'num1':index == 1 ||index == 2,'num2':index > 2}">{{index+1}}</span>
             <!-- <img class="portrait" :src="require('images/No1.png')" /> -->
             <span class="name">{{item.staff_name}}</span>
           </p>
@@ -69,7 +70,7 @@ export default {
     return {
       list: [],
       page: 1,
-      pageSize: 8,
+      pageSize: 12,
       last_page: 100,
       todayCount: 0,
       weekCount: 0,
@@ -87,7 +88,9 @@ export default {
 
 <style lang="scss" scoped>
 @import 'assets/styles/list.scss';
-
+.container{
+  padding-bottom:1rem;
+}
 .title {
   font-size: 0.38rem;
   color: #222;
@@ -102,6 +105,7 @@ export default {
 }
 .icon {
   width: 0.46rem;
+  margin-left: -0.15rem;
 }
 .total {
   font-size: 0.3rem;
