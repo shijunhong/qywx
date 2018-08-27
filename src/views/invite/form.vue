@@ -73,34 +73,22 @@ export default {
       if (this.mobile.length !== 11) {
         return
       }
+      const _this = this
       getVerifyCode(this.mobile, this.staff_id, 0).then((res) => {
         clearInterval(this.countTime)
         if (res.status === 'T') {
-          this.checkYzmStatus()
-        }
-      })
-    },
-    checkYzmStatus() {
-      getVerifyCode(this.mobile, this.staff_id, 1).then((res) => {
-        if (res.status === 'T') {
-          Toast('验证码发送成功')
-          clearInterval(this.timeID)
-          this.timeID = null
-          this.count = true
-          this.countTime = setInterval(() => {
-            if (this.num === 0) {
-              clearInterval(this.countTime)
-              this.countTime = null
-              this.num = 60
-              this.count = false
+          Toast('验证码已发送')
+          _this.countTime = setInterval(() => {
+            if (_this.num <= 0) {
+              clearInterval(_this.countTime)
+              _this.countTime = null
+              _this.num = 60
+              _this.count = false
               return
             }
-            this.num--
+            _this.count = true
+            _this.num--
           }, 1000)
-        } else {
-          setTimeout(() => {
-            this.checkYzmStatus()
-          }, 3000)
         }
       })
     },
