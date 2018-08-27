@@ -31,6 +31,7 @@
         </li>
       </ul>
       <load-bottom v-if="showLoadBottm"/>
+      <load-bottom v-if="nodata" content="暂无内容"/>
   </div>
 </template>
 
@@ -53,7 +54,8 @@ export default {
   },
   methods: {
     getData() {
-      if (this.page >= this.last_page) return
+      // eslint-disable-next-line
+      if (this.page > this.last_page) return
       range(this.page, this.pageSize).then((res) => {
         if (res.status === 'T') {
           this.list = [...this.list, ...res.data]
@@ -71,7 +73,7 @@ export default {
       list: [],
       page: 1,
       pageSize: 12,
-      last_page: 100,
+      last_page: 1,
       todayCount: 0,
       weekCount: 0,
       monthCount: 0
@@ -79,7 +81,13 @@ export default {
   },
   computed: {
     showLoadBottm() {
-      if (this.page >= this.last_page) return true
+      // eslint-disable-next-line
+      if (this.page > this.last_page && this.last_page != 0) return true
+      return false
+    },
+    nodata() {
+      // eslint-disable-next-line
+      if (this.last_page == 0) return true
       return false
     }
   }
@@ -88,8 +96,8 @@ export default {
 
 <style lang="scss" scoped>
 @import 'assets/styles/list.scss';
-.container{
-  padding-bottom:1rem;
+.container {
+  padding-bottom: 1rem;
 }
 .title {
   font-size: 0.38rem;
@@ -115,6 +123,11 @@ export default {
   margin-left: 0.4rem;
   font-size: 0.3rem;
   color: #222;
+}
+.list-item:first-child {
+  .name {
+    margin-left: 0.2rem;
+  }
 }
 .num1 {
   color: #f5673a;
