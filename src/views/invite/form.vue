@@ -98,7 +98,9 @@ export default {
             this.num--
           }, 1000)
         } else {
-          this.checkYzmStatus()
+          setTimeout(() => {
+            this.checkYzmStatus()
+          }, 3000)
         }
       })
     },
