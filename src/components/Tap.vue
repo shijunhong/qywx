@@ -1,18 +1,18 @@
 <template>
   <div class="tap" @touchstart="start" @touchend="end" >
     <div class="tap-head">
-      <div class="tap-item" :class="{'active':index_tap === 1}" @click="index = 1">
+      <div class="tap-item" :class="{'active':index === 1}" @click="index = 1">
           <span>{{tap1}}</span>
           <span class="line" v-show="index === 1"></span>
       </div>
-      <div class="tap-item" :class="{'active':index_tap === 2}" @click="index = 2">
+      <div class="tap-item" :class="{'active':index === 2}" @click="index = 2">
           <span>{{tap2}}</span>
           <span class="line"  v-show="index === 2"></span>
       </div>
     </div>
     <slot ></slot>
-    <slot v-if="index_tap === 1" name="tap1"></slot>
-    <slot v-if="index_tap === 2" name="tap2"></slot>
+    <slot v-if="index === 1" name="tap1"></slot>
+    <slot v-if="index === 2" name="tap2"></slot>
   </div>
 </template>
 
@@ -20,9 +20,8 @@
 export default {
   name: 'tap',
   props: {
-    index: {
-      type: Number,
-      default: () => 1
+    tap_index: {
+      type: Number
     },
     tap1: {
       type: String,
@@ -33,15 +32,16 @@ export default {
       required: true
     }
   },
-  computed: {
-    index_tap() {
-      return this.index
-    }
-  },
   data() {
     return {
+      index: 1,
       pageX: 0,
       pageY: 0
+    }
+  },
+  beforeMount() {
+    if (this.tap_index) {
+      this.index = this.tap_index
     }
   },
   mounted() {},
