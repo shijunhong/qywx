@@ -56,11 +56,14 @@ export default {
     getData() {
       // eslint-disable-next-line
       if (this.page > this.last_page) return
+      if (this.loading) return
+      this.loading = true
       range(this.page, this.pageSize).then((res) => {
         if (res.status === 'T') {
           this.list = [...this.list, ...res.data]
           this.last_page = res.pagination.last_page
           this.page++
+          this.loading = false
         }
       })
     },
@@ -76,7 +79,8 @@ export default {
       last_page: 1,
       todayCount: 0,
       weekCount: 0,
-      monthCount: 0
+      monthCount: 0,
+      loading: false
     }
   },
   computed: {
