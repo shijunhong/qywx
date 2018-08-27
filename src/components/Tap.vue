@@ -11,8 +11,8 @@
       </div>
     </div>
     <slot ></slot>
-    <slot v-if="index === 1" name="tap1"></slot>
-    <slot v-if="index === 2" name="tap2"></slot>
+    <slot v-if="index === 1" name="tap1" ></slot>
+    <slot v-if="index === 2" name="tap2" ></slot>
   </div>
 </template>
 
@@ -73,7 +73,7 @@ export default {
     },
     // 左右滑动
     slide() {
-      if (Math.abs(this.pageX - this.pageXend) > 30) {
+      if (Math.abs(this.pageX - this.pageXend) > 120) {
         if (this.pageX > this.pageXend) {
           if (this.index > 1) {
             this.index = this.index - 1

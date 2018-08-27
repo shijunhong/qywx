@@ -44,7 +44,7 @@ export default new Vuex.Store({
         sessionStorage.setItem('access_token', res.access_token)
         sessionStorage.setItem('refresh_token', res.refresh_token)
         // 登录成功跳转
-        router.push('/invite')
+        router.replace('/invite')
       })
     }
   }
