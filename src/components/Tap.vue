@@ -56,16 +56,21 @@ export default {
     let tap_index = sessionStorage.getItem('tap_index')
     if (tap_index) {
       this.index = Number(tap_index)
+      this.change()
     }
   },
   mounted() {},
   methods: {
+    change() {
+      this.$emit('change', this.index)
+    },
     setStorage() {
       sessionStorage.setItem('tap_index', this.index)
     },
     handleClick(index) {
       this.index = index
       this.setStorage()
+      this.change()
     },
     start(e) {
       this.pageX = e.touches[0].pageX
@@ -78,11 +83,13 @@ export default {
           if (this.index > 1) {
             this.index = this.index - 1
             this.setStorage()
+            this.change()
           }
         } else {
           if (this.index < 2) {
             this.index = this.index + 1
             this.setStorage()
+            this.change()
           }
         }
       }

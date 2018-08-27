@@ -1,19 +1,14 @@
 <template>
-  <div
-      class="container"
-       v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="0"
-  >
+  <div class="container">
       <div class="statistics">
           <p class="title item-1 statistics-item">邀请客户数</p>
           <p class="item-2 statistics-item">
-            <span>本周：{{weekCount}}</span>
-            <span>当月：{{monthCount}}</span>
+            <span>本周：{{statistics.weekCount}}</span>
+            <span>当月：{{statistics.monthCount}}</span>
           </p>
           <div class="item-3 statistics-item">
             <p class="sub-title">今日邀请</p>
-            <p class="num">{{todayCount}}</p>
+            <p class="num">{{statistics.todayCount}}</p>
           </div>
       </div>
       <p class="title">最新邀请客户</p>
@@ -32,58 +27,35 @@
 </template>
 
 <script>
-import { newestList, statistics } from 'api/customer'
 import LoadBottom from 'components/LoadBottom'
 
 export default {
+  props: {
+    statistics: {
+      type: Object,
+      required: true
+    },
+    list: {
+      type: Array,
+      required: true
+    },
+    p: {
+      type: Object,
+      required: true
+    }
+  },
   components: {
     LoadBottom
-  },
-  mounted() {
-    statistics().then((res) => {
-      if (res.status === 'T') {
-        this.todayCount = res.data.todayCount
-        this.weekCount = res.data.weekCount
-        this.monthCount = res.data.monthCount
-      }
-    })
-  },
-  methods: {
-    getData() {
-      // eslint-disable-next-line
-      if (this.page > this.last_page) return
-      newestList(this.page, this.pageSize).then((res) => {
-        if (res.status === 'T') {
-          this.list = [...this.list, ...res.data]
-          this.last_page = res.pagination.last_page
-          this.page++
-        }
-      })
-    },
-    loadMore() {
-      this.getData()
-    }
-  },
-  data() {
-    return {
-      list: [],
-      page: 1,
-      pageSize: 12,
-      last_page: 1,
-      todayCount: 0,
-      weekCount: 0,
-      monthCount: 0
-    }
   },
   computed: {
     showLoadBottm() {
       // eslint-disable-next-line
-      if (this.page > this.last_page && this.last_page != 0) return true
+      if (this.p.page > this.p.last_page && this.p.last_page != 0) return true
       return false
     },
     nodata() {
       // eslint-disable-next-line
-      if (this.last_page == 0) return true
+      if (this.p.last_page == 0) return true
       return false
     }
   }
