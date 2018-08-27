@@ -1,11 +1,11 @@
 <template>
   <div class="tap" @touchstart="start" @touchend="end" >
     <div class="tap-head">
-      <div class="tap-item" :class="{'active':index === 1}" @click="index = 1">
+      <div class="tap-item" :class="{'active':index === 1}" @click="handleClick(1)">
           <span>{{tap1}}</span>
           <span class="line" v-show="index === 1"></span>
       </div>
-      <div class="tap-item" :class="{'active':index === 2}" @click="index = 2">
+      <div class="tap-item" :class="{'active':index === 2}" @click="handleClick(2)">
           <span>{{tap2}}</span>
           <span class="line"  v-show="index === 2"></span>
       </div>
@@ -30,46 +30,77 @@ export default {
     tap2: {
       type: String,
       required: true
+    },
+    // 是否需要向上刷新
+    isRefresh: {
+      type: Boolean,
+      default: () => false
     }
   },
   data() {
     return {
       index: 1,
       pageX: 0,
-      pageY: 0
+      pageY: 0,
+      pageXend: 0,
+      pageYend: 0
     }
   },
   beforeMount() {
+    sessionStorage.removeItem('refresh')
     if (this.tap_index) {
       this.index = this.tap_index
+      return
+    }
+
+    let tap_index = sessionStorage.getItem('tap_index')
+    if (tap_index) {
+      this.index = Number(tap_index)
     }
   },
   mounted() {},
   methods: {
+    setStorage() {
+      sessionStorage.setItem('tap_index', this.index)
+    },
+    handleClick(index) {
+      this.index = index
+      this.setStorage()
+    },
     start(e) {
       this.pageX = e.touches[0].pageX
       this.pageY = e.touches[0].pageY
     },
-    end(e) {
-      const pageX2 = e.changedTouches[0].pageX
-      if (Math.abs(this.pageX - pageX2) > 30) {
-        if (this.pageX > pageX2) {
+    // 左右滑动
+    slide() {
+      if (Math.abs(this.pageX - this.pageXend) > 30) {
+        if (this.pageX > this.pageXend) {
           if (this.index > 1) {
             this.index = this.index - 1
-            return
+            this.setStorage()
           }
         } else {
           if (this.index < 2) {
             this.index = this.index + 1
-            return
+            this.setStorage()
           }
         }
       }
-
-      const pageY2 = e.changedTouches[0].pageY
-      if (Math.abs(this.pageY - pageY2) > 30) {
-        location.reload()
+    },
+    // 向上刷新
+    refresh() {
+      if (!this.isRefresh) return
+      if (this.pageY - this.pageYend > 150) {
+        sessionStorage.setItem('refresh', 'true')
+        this.$router.go(0)
       }
+    },
+    end(e) {
+      // 左右滑动
+      this.pageXend = e.changedTouches[0].pageX
+      this.pageYend = e.changedTouches[0].pageY
+      this.slide()
+      this.refresh()
     }
   }
 }

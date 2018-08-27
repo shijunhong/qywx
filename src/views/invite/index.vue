@@ -1,6 +1,6 @@
 <template>
   <div>
-      <tap tap1="添加到我的客户" tap2="关注微工作台">
+      <tap tap1="添加到我的客户" tap2="关注微工作台" :isRefresh="true">
         <add slot="tap1" :info="info"/>
         <attention slot="tap2" :info="info"/>
     </tap>

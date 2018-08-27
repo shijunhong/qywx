@@ -7,10 +7,10 @@ import MintUI from 'mint-ui'
 import 'assets/styles/reset.css'
 import 'assets/styles/reset_mintui.css'
 import './utils/extend'
+import VueClipboard from 'vue-clipboard2'
 // import {
 //   refreshExpires
 // } from 'utils/refreshToken'
-import VueClipboard from 'vue-clipboard2'
 
 VueClipboard.config.autoSetContainer = true // add this line
 Vue.use(VueClipboard)

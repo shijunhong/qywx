@@ -151,6 +151,7 @@ export default {
 .statistics-item {
   color: #fff;
   position: absolute;
+  margin-left: 0;
 }
 .item-1 {
   position: absolute;
