@@ -8,6 +8,8 @@ module.exports = {
     '@vue/standard'
   ],
   rules: {
+    "camelcase":0,
+    "no-extend-native":0,
     "eol-last":0,
     "no-console": 1, // 使用console.log警告
     "no-debugger": 1, // 使用debugger警告

@@ -1,0 +1,27 @@
+$h:0.9rem;
+.list {
+  .list-item {
+    border-bottom: 0.01rem solid #e6e6e6;
+    margin-left: 0.3rem;
+    padding: 0.3rem;
+    width: calc(100% - 0.3rem);
+    height: $h;
+    line-height: $h;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    &:first-child {
+      border-top: 0.01rem solid #e6e6e6;
+    }
+    .list-item-left,
+    .list-item-right {
+      display: flex;
+      align-items: center;
+      height: $h;
+      line-height: $h;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
