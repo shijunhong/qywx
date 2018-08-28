@@ -93,10 +93,10 @@ export default {
       })
     },
     name_rule(res) {
-      if (res.length > 50) {
+      if (res.length > 30) {
         return {
           result: 'faild',
-          tip: '客户名称最多填写50个字哦'
+          tip: '客户名称最多填写30个字哦'
         }
         // eslint-disable-next-line
       } else {
@@ -106,10 +106,10 @@ export default {
       }
     },
     contact_rule(res) {
-      if (res.length > 50) {
+      if (res.length > 30) {
         return {
           result: 'faild',
-          tip: '联系人最多填写50个字哦'
+          tip: '联系人最多填写30个字哦'
         }
         // eslint-disable-next-line
       } else {
