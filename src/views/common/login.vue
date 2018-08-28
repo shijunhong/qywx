@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$h: 1.22rem;
+$h: 1.8rem;
 .login {
   height: 100vh;
   display: flex;
@@ -50,20 +50,16 @@ $h: 1.22rem;
   display: block;
   border-radius: 50%;
   box-sizing: content-box;
-  animation: animate 3s linear infinite;
+  animation: animate 2s linear infinite;
 }
 @keyframes animate {
   0% {
     background: #c3d4eb;
     padding: 0;
   }
-  50% {
-    background: #eef2f9;
-    padding: 0.3rem;
-  }
   100% {
     background: #eef2f9;
-    padding: 0.6rem;
+    padding: 0.4rem;
   }
 }
 </style>
