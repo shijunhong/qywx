@@ -15,8 +15,8 @@ import VueClipboard from 'vue-clipboard2'
 VueClipboard.config.autoSetContainer = true // add this line
 Vue.use(VueClipboard)
 
-// sessionStorage.setItem('refresh_token', 'zTA1zGKY68Fgi5JRl6zGBICQNoNUXkqR2XVtOlAe')
-// sessionStorage.setItem('access_token', 'LRoYUwPx7Gzc5PHi0Sx72KyP2aaktZRVMRHwGXWm')
+// sessionStorage.setItem('refresh_token', '5ZlsZKOOUgRkgtKKVO6Kv8HVBvUIN3DB5nTqCDfH')
+// sessionStorage.setItem('access_token', 'ybusrdEBkJewFN8FUUNXWGZExPOZN5ToVvFndiK5')
 // refreshExpires('86400')
 
 Vue.prototype.$wx = window.wx

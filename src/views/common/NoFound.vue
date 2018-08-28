@@ -1,7 +1,7 @@
 <template>
-  <div class="no-auth">
-    <img :src="require('images/noprivil.png')" />
-    <p>404，页面未找到</p>
+  <div class="notfound">
+      <img :src="require('images/404.png')" />
+      <p>该页面不存在</p>
   </div>
 </template>
 
@@ -10,14 +10,14 @@ export default {}
 </script>
 
 <style lang="scss" scoped>
-.no-auth {
-  padding-top: 30%;
+.notfound {
+  padding-top: 50%;
   img {
     margin: 0 auto;
-    margin-bottom: 0.8rem;
+    // margin-bottom: 0.8rem;
     display: block;
-    width: 2.8rem;
-    height: 2.03rem;
+    width: 4.49rem;
+    height: 2.51rem;
   }
   p {
     text-align: center;
