@@ -19,11 +19,13 @@
       <p class="title">最新邀请客户</p>
       <ul class="list">
         <li class="list-item" v-for="(item,index) in list" :key="index">
-          <p class="list-item-left">{{item.client_name}}</p>
-          <p class="list-item-ritht">
-            <span class="name">{{item.contact_name}}</span>
-            <span class="date">{{item.register_date}}</span>
-          </p>
+          <div class="list-item-left">
+            <p>{{item.client_name}}</p>
+          </div>
+          <div class="list-item-ritht">
+            <p class="name">{{item.contact_name}}</p>
+            <p class="date">{{item.register_date}}</p>
+          </div>
         </li>
       </ul>
       <load-bottom v-if="showLoadBottm"/>
@@ -98,6 +100,28 @@ export default {
 @import 'assets/styles/list.scss';
 .list-item-left {
   font-size: 0.3rem;
+  width: 33%;
+  p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+}
+.list-item-ritht {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 60%;
+  overflow: hidden;
+  .name {
+    width: calc(100% - 1.3rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: right;
+  }
 }
 .container {
   padding-bottom: 1rem;
