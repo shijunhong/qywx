@@ -19,12 +19,12 @@
       <p class="title">员工月邀请排行</p>
       <ul class="list">
         <li class="list-item" v-for="(item,index) in list" :key="index">
-          <p class="list-item-left">
+          <div class="list-item-left">
             <img v-if="index == 0" class="icon" :src="require('images/No1.png')" alt="" />
             <span v-if="index != 0" :class="{'num1':index == 1 ||index == 2,'num2':index > 2}">{{index+1}}</span>
             <!-- <img class="portrait" :src="require('images/No1.png')" /> -->
-            <span class="name">{{item.staff_name}}</span>
-          </p>
+            <p class="name">{{item.staff_name}}</p>
+          </div>
           <p class="list-item-ritht">
             <span class="total">{{item.inviteCount}}</span>
           </p>
@@ -100,6 +100,15 @@ export default {
 
 <style lang="scss" scoped>
 @import 'assets/styles/list.scss';
+.list-item-left {
+  width: 90%;
+  .name {
+    width: calc(100% - 0.6rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
 .container {
   padding-bottom: 1rem;
 }

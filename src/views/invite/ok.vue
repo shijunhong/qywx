@@ -4,16 +4,16 @@
     <p class="tip">客户资料已提交</p>
     <div class="form">
         <div class="item">
-          <span class="title">客户名称：</span>
-          <span class="info">{{client_name}}</span>
+          <p class="title">客户名称：</p>
+          <p class="info">{{client_name}}</p>
         </div>
         <div class="item">
-          <span class="title">联系人：</span>
-          <span class="info">{{contact_name}}</span>
+          <p class="title">联系人：</p>
+          <p class="info">{{contact_name}}</p>
         </div>
         <div class="item">
-          <span class="title">手机号：</span>
-          <span class="info">{{mobile}}</span>
+          <p class="title">手机号：</p>
+          <p class="info">{{mobile}}</p>
         </div>
     </div>
     <!-- <div class="btn-box">
@@ -82,6 +82,11 @@ $h: 0.7rem;
     height: $h;
     line-height: $h;
     display: inline-block;
+    width: calc(100% - 1.5rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: right;
   }
   .item {
     display: flex;
