@@ -89,6 +89,11 @@ export default {
             _this.count = true
             _this.num--
           }, 1000)
+        } else {
+          Toast({
+            message: res.error[0],
+            duration: 2000
+          })
         }
       })
     },

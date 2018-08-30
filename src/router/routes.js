@@ -25,6 +25,12 @@ export default [
       import ('views/invite/ok')
   },
   {
+    path: '/workbench',
+    name: '工作台',
+    component: () =>
+      import ('views/invite/workbench')
+  },
+  {
     path: '/customer',
     name: '获客统计',
     component: () =>

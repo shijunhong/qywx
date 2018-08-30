@@ -1,12 +1,9 @@
 /* eslint-disable */
-import {
-  host
-} from '../config'
 import axios from 'axios'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: `${host}`,
+  baseURL: `${window.g.host}`,
   timeout: 60000 // 请求超时时间
 })
 

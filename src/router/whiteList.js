@@ -3,5 +3,6 @@ export default [
   '/expire',
   '/nofound',
   '/addclient',
-  '/inviteok'
+  '/inviteok',
+  '/workbench'
 ]

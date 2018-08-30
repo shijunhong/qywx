@@ -14,11 +14,10 @@ import add from './add'
 import attention from './attention'
 import Bottom from 'components/Bottom'
 import { getQr } from 'api/invite'
-import { redirectHost } from '@/config'
 
 export default {
   mounted() {
-    getQr(`${redirectHost}/addclient`).then((res) => {
+    getQr(`${window.g.redirectHost}/addclient`).then((res) => {
       if (res.status === 'T') {
         this.info = res.data
       }

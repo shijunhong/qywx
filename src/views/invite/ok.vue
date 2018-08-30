@@ -33,7 +33,8 @@ export default {
     return {
       client_name: '',
       contact_name: '',
-      mobile: ''
+      mobile: '',
+      url: ''
     }
   },
   mounted() {
@@ -41,6 +42,9 @@ export default {
     this.client_name = query.client_name
     this.contact_name = query.contact_name
     this.mobile = query.mobile
+    // setTimeout(() => {
+    //   this.$router.push(`/workbench?url=${query.url}`)
+    // }, 3000)
   },
   methods: {
     // 完成
