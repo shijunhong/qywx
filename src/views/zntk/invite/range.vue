@@ -1,7 +1,7 @@
 <template>
   <div
       class="container"
-       v-infinite-scroll="loadMore"
+      v-infinite-scroll="loadMore"
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="0"
   >
@@ -16,25 +16,27 @@
             <p class="num">{{todayCount}}</p>
           </div>
       </div>
-      <p class="title">最新邀请客户</p>
+      <p class="title">员工月邀请排行</p>
       <ul class="list">
         <li class="list-item" v-for="(item,index) in list" :key="index">
           <div class="list-item-left">
-            <p>{{item.client_name}}</p>
+            <img v-if="index == 0" class="icon" :src="require('images/No1.png')" alt="" />
+            <span v-if="index != 0" :class="{'num1':index == 1 ||index == 2,'num2':index > 2}">{{index+1}}</span>
+            <!-- <img class="portrait" :src="require('images/No1.png')" /> -->
+            <p class="name">{{item.staff_name}}</p>
           </div>
-          <div class="list-item-ritht">
-            <p class="name">{{item.contact_name}}</p>
-            <p class="date">{{item.register_date}}</p>
-          </div>
+          <p class="list-item-ritht">
+            <span class="total">{{item.inviteCount}}</span>
+          </p>
         </li>
       </ul>
       <load-bottom v-if="showLoadBottm"/>
-      <load-bottom v-if="nodata" content="你还未邀请到客户"/>
+      <load-bottom v-if="nodata" content="暂无内容"/>
   </div>
 </template>
 
 <script>
-import { newestList, statistics } from 'api/customer'
+import { range, allStatistics } from 'api/zntk/customer'
 import LoadBottom from 'components/LoadBottom'
 
 export default {
@@ -42,7 +44,7 @@ export default {
     LoadBottom
   },
   mounted() {
-    statistics().then((res) => {
+    allStatistics().then((res) => {
       if (res.status === 'T') {
         this.todayCount = res.data.todayCount
         this.weekCount = res.data.weekCount
@@ -56,7 +58,7 @@ export default {
       if (this.page > this.last_page) return
       if (this.loading) return
       this.loading = true
-      newestList(this.page, this.pageSize).then((res) => {
+      range(this.page, this.pageSize).then((res) => {
         if (res.status === 'T') {
           this.list = [...this.list, ...res.data]
           this.last_page = res.pagination.last_page
@@ -99,28 +101,12 @@ export default {
 <style lang="scss" scoped>
 @import 'assets/styles/list.scss';
 .list-item-left {
-  font-size: 0.3rem;
-  width: 33%;
-  p {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
-  }
-}
-.list-item-ritht {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-  align-items: center;
-  width: 60%;
-  overflow: hidden;
+  width: 90%;
   .name {
-    width: calc(100% - 1.3rem);
+    width: calc(100% - 0.6rem);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    text-align: right;
   }
 }
 .container {
@@ -132,14 +118,37 @@ export default {
   margin-bottom: 0.3rem;
   margin-left: 0.3rem;
 }
-.name {
+.portrait {
+  height: 0.64rem;
+  line-height: 0.64rem;
+  margin: 0 0.4rem 0 0.24rem;
+  border-radius: 50%;
+}
+.icon {
+  width: 0.46rem;
+  margin-left: -0.15rem;
+}
+.total {
   font-size: 0.3rem;
   color: #222;
 }
-.date {
-  font-size: 0.26rem;
-  color: #999;
-  margin-left: 0.6rem;
+.name {
+  margin-left: 0.4rem;
+  font-size: 0.3rem;
+  color: #222;
+}
+.list-item:first-child {
+  .name {
+    margin-left: 0.2rem;
+  }
+}
+.num1 {
+  color: #f5673a;
+  font-size: 0.3rem;
+}
+.num2 {
+  color: #222;
+  font-size: 0.3rem;
 }
 .customer {
   padding-bottom: 1.5rem;

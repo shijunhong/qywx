@@ -8,16 +8,17 @@ import 'assets/styles/reset.css'
 import 'assets/styles/reset_mintui.css'
 import './utils/extend'
 import VueClipboard from 'vue-clipboard2'
+// 打包记得注释掉
 // import {
 //   refreshExpires
 // } from 'utils/refreshToken'
+// 打包记得注释掉
+// sessionStorage.setItem('refresh_token', 'x9witb0uHSF3qBVFiNhwpEXhevDjifRpo43q1t2o')
+// sessionStorage.setItem('access_token', 'xylhx1AJwEwXXhKOzT3Efwgd7IY47YRluBCKi1yy')
+// refreshExpires('86400')
 
 VueClipboard.config.autoSetContainer = true // add this line
 Vue.use(VueClipboard)
-
-// sessionStorage.setItem('refresh_token', 'w1sZKeFw7CfNbw2XGLGbfAJc6GstKh3QQeJL4if8')
-// sessionStorage.setItem('access_token', 'eKo0FSTN0zqwUXqTCxFwDU50GL8IbfVghyaptk5w')
-// refreshExpires('86400')
 
 Vue.prototype.$wx = window.wx
 Vue.config.productionTip = false

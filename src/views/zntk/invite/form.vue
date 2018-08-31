@@ -30,7 +30,7 @@
 <script>
 import WxInput from 'components/WxInput'
 import { Button, Toast } from 'mint-ui'
-import { getVerifyCode, invite } from 'api/invite'
+import { getVerifyCode, invite } from 'api/zntk/invite'
 
 export default {
   components: {

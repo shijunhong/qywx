@@ -13,6 +13,11 @@ const router = new Router({
 
 // 路由切换需要做的额外事情
 function others(to,from){
+  // 存入appName和appId
+  if(to.query.app_name || to.query.app_id){
+    localStorage.setItem('app_name',to.query.app_name)
+    localStorage.setItem('app_id',to.query.app_id)
+  }
    // 辅助tap组件的刷新
   if(sessionStorage.getItem('refresh') == 'true'){
     return

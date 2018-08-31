@@ -13,7 +13,7 @@ import Tap from 'components/Tap'
 import add from './add'
 import attention from './attention'
 import Bottom from 'components/Bottom'
-import { getQr } from 'api/invite'
+import { getQr } from 'api/zntk/invite'
 
 export default {
   mounted() {

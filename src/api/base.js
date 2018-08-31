@@ -9,7 +9,7 @@ export function login(code) {
       client_id: 1,
       client_secret: 'syjIoXiFY7wrjZiUQDRPel4DSrtcWz9SZqBfX5Pw',
       code,
-      app_name: 'zntk'
+      app_name: localStorage.getItem('app_name')
     },
     method: 'post'
   })
